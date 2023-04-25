@@ -1,11 +1,10 @@
 import { DisconnectReason, Server, Socket } from "socket.io";
-
+ 
 /**
  * the events that the server can emit to the client
  * @function message - a message from the server
  */
 export interface ServerToClientEvents {
-    join: (room: string) => void;
     message: (sender: string, message: string, room: string) => void;
 }
 
@@ -16,7 +15,7 @@ export interface ServerToClientEvents {
  * @function disconnect - disconnect from the server
  */
 export interface ClientToServerEvents {
-    join: (room: string) => void;
+    join: (room: string, callback: any) => void;
     message: (sender: string, message: string, room: string) => void;
     disconnect: (reason: DisconnectReason) => void;
 }
