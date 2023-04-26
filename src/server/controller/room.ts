@@ -1,6 +1,6 @@
 import { Room } from "../models/room";
 import { Collections } from "../services/database";
-import { InsertOneResult, ObjectId } from "mongodb";
+import { InsertOneResult } from "mongodb";
 
 
 /**
@@ -29,7 +29,7 @@ export const createRoom = async (room: Room): Promise<InsertOneResult|Error> => 
  */
 export const getRoomsByMember = async (userId: string): Promise<Room[]|Error> => {
     try {
-        const rooms = await Collections.Rooms!.find({ $in: [userId, "$members"] }).toArray();
+        const rooms = await Collections.Rooms!.find({ members: { $elemMatch: { $eq: userId } } }).toArray();
         return rooms;
     } catch (e) {
         console.error(e);
