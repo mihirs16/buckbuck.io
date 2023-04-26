@@ -5,10 +5,9 @@ import { BSON } from "mongodb";
  * interface for a chat message
  */
 export interface Message extends BSON.Document {
-    _id: BSON.ObjectId;
-    sender: BSON.ObjectId;
-    message: string;
-    room: BSON.ObjectId;
+    _id: BSON.ObjectId,
+    sender: BSON.ObjectId | string,
+    room: BSON.ObjectId,
     content: string,
     type: "text" | "file",
     replyTo: BSON.ObjectId,
@@ -22,14 +21,14 @@ export interface Message extends BSON.Document {
 export const MessageSchema = {
     $jsonSchema: {
         bsonType: "object",
-        required: ["sender", "message", "room", "content", "type", "timestamp"],
+        required: ["sender", "room", "content", "type", "timestamp"],
         additionalProperties: false,
         properties: {
             _id: {
                 bsonType: "objectId"
             },
             sender: {
-                bsonType: "objectId"
+                bsonType: "string"
             },
             message: {
                 bsonType: "string"

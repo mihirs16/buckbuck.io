@@ -11,6 +11,7 @@ import { InsertOneResult, ObjectId } from "mongodb";
 export const createRoom = async (room: Room): Promise<InsertOneResult|Error> => {
     try {
         const result = await Collections.Rooms!.insertOne(room);
+        console.log(result)
         if (result && result.acknowledged === true)
             return result;
         else

@@ -6,8 +6,9 @@ import express from "express";
 import { Server } from "socket.io";
 import { BuckServer } from "./types/socketio";
 import { connection } from "./server/routes/socketio";
-import roomRouter from "./server/routes/room";
 import { connectDB } from "./server/services/database";
+import roomRouter from "./server/routes/room";
+import messageRouter from "./server/routes/message";
 
 connectDB();
 
@@ -15,6 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/room", roomRouter);
+app.use("/message", messageRouter);
 
 const httpServer = http.createServer(app);
 

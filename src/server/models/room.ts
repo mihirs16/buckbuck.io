@@ -6,7 +6,7 @@ import { BSON } from "mongodb";
  */
 export interface Room extends BSON.Document {
     _id: BSON.ObjectId;
-    members: Array<BSON.ObjectId>;
+    members: Array<BSON.ObjectId> | Array<string>;
     metadata: Object;
 }
 
@@ -26,7 +26,7 @@ export const RoomSchema = {
             members: {
                 bsonType: "array",
                 items: {
-                    bsonType: "objectId",
+                    bsonType: "string",
                 }
             },
             metadata: {
