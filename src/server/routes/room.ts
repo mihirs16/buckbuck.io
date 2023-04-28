@@ -16,4 +16,12 @@ router.get("/", async (request: Request, response: Response) => {
     response.status(status).send(result);
 });
 
+
+router.get("/join", async (request: Request, response: Response) => {
+    const result = await RoomController.joinRoom(request.query.user_id as string, request.query.room_id as string);
+    const status = result instanceof Error ? 500 : 200;
+    response.status(status).send(result);
+});
+
+
 export default router;
